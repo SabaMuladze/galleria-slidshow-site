@@ -1,5 +1,8 @@
 <template>
   <Header></Header>
+  <section>
+    <router-view></router-view>
+  </section>
 </template>
 
 <script>
