@@ -1,7 +1,24 @@
 <template>
   <section class="cards">
-    <div class="card" v-for="card in data" :key="card.name">
-      <img :src="card.images.thumbnail" alt="wr" />
+    <div class="card-col">
+      <div class="card" v-for="card in data[0]" :key="card.name">
+        <img :src="card.images.thumbnail" alt="wr" />
+      </div>
+    </div>
+    <div class="card-col">
+      <div class="card" v-for="card in data[1]" :key="card.name">
+        <img :src="card.images.thumbnail" alt="wr" />
+      </div>
+    </div>
+    <div class="card-col">
+      <div class="card" v-for="card in data[2]" :key="card.name">
+        <img :src="card.images.thumbnail" alt="wr" />
+      </div>
+    </div>
+    <div class="card-col">
+      <div class="card" v-for="card in data[3]" :key="card.name">
+        <img :src="card.images.thumbnail" alt="wr" />
+      </div>
     </div>
   </section>
 </template>
@@ -15,19 +32,20 @@ export default {
       thumb: "../assets/starry-night/thumbnail.jpg",
     };
   },
-  mounted() {
-    fetch("../../data.json")
-      .then((response) => response.json())
-      .then((data) => {
-        this.items = data;
-        console.log(this.items);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-    console.log(this.thumb);
-  },
+  mounted() {},
 };
 </script>
 
-<style></style>
+<style scoped>
+.cards {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+.card-col {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+</style>
