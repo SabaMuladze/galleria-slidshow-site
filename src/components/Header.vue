@@ -24,4 +24,24 @@
 
 <script></script>
 
-<style scoped></style>
+<style scoped>
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 24px;
+  align-items: center;
+  border-bottom: #e5e5e5 1px solid;
+  margin-bottom: 24px;
+}
+p {
+  color: #7d7d7d;
+
+  text-align: right;
+  font-family: "Libre Baskerville";
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1.929px;
+}
+</style>

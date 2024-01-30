@@ -29,7 +29,6 @@ export default {
   data() {
     return {
       data,
-      thumb: "../assets/starry-night/thumbnail.jpg",
     };
   },
   mounted() {},
@@ -40,12 +39,36 @@ export default {
 .cards {
   width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   gap: 40px;
+  margin-bottom: 24px;
+  padding: 24px;
+  justify-content: space-between;
 }
 .card-col {
   display: flex;
   flex-direction: column;
   gap: 40px;
+  width: 100%;
+}
+.card,
+.card img {
+  height: 100%;
+  width: 100%;
+}
+@media (min-width: 688px) {
+  .cards {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .card-col {
+    width: 45%;
+  }
+  .card,
+  .card img {
+    height: 100%;
+    width: 100%;
+  }
 }
 </style>
