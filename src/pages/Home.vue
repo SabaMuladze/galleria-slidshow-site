@@ -61,14 +61,32 @@ export default {
   .cards {
     flex-direction: row;
     flex-wrap: wrap;
+    gap: 0;
   }
   .card-col {
-    width: 45%;
+    width: 48%;
   }
-  .card,
   .card img {
     height: 100%;
     width: 100%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .card-col {
+    width: 23%;
+  }
+
+  .cards {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .cards {
+    padding-left: 150px;
+    padding-right: 150px;
   }
 }
 </style>
