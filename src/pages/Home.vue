@@ -101,6 +101,18 @@ img {
     rgba(0, 0, 0, 0) 0%,
     rgba(0, 0, 0, 0.84) 100%
   );
+  transition: 0.3s;
+}
+.card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0);
+  z-index: 1;
+  transition: 0.3s;
 }
 @media (min-width: 688px) {
   .cards {
@@ -128,6 +140,10 @@ img {
   }
   .card {
     cursor: pointer;
+    border-radius: 10px;
+  }
+  .card:hover::after {
+    background-color: rgba(255, 255, 255, 0.199);
   }
 }
 
