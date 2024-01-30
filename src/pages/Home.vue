@@ -1,40 +1,72 @@
 <template>
   <section class="cards">
     <div class="card-col">
-      <div class="card" v-for="card in data[0]" :key="card.name">
+      <router-link
+        class="card"
+        v-for="card in data[0]"
+        :key="card.name"
+        :to="{
+          path: '/details/' + card.name,
+          query: { data: card.name, num: 0 },
+        }"
+      >
         <img :src="card.images.thumbnail" alt="wr" />
         <div class="title">
           <h2>{{ card.name }}</h2>
           <p>{{ card.artist.name }}</p>
         </div>
-      </div>
+      </router-link>
     </div>
     <div class="card-col">
-      <div class="card" v-for="card in data[1]" :key="card.name">
+      <router-link
+        class="card"
+        v-for="card in data[1]"
+        :key="card.name"
+        :to="{
+          path: '/details/' + card.name,
+          query: { data: card.name, num: 1 },
+        }"
+      >
         <img :src="card.images.thumbnail" alt="wr" />
         <div class="title">
           <h2>{{ card.name }}</h2>
           <p>{{ card.artist.name }}</p>
         </div>
-      </div>
+      </router-link>
     </div>
     <div class="card-col">
-      <div class="card" v-for="card in data[2]" :key="card.name">
+      <router-link
+        class="card"
+        v-for="card in data[2]"
+        :key="card.name"
+        :to="{
+          path: '/details/' + card.name,
+          query: { data: card.name, num: 2 },
+        }"
+      >
         <img :src="card.images.thumbnail" alt="wr" />
         <div class="title">
           <h2>{{ card.name }}</h2>
           <p>{{ card.artist.name }}</p>
         </div>
-      </div>
+      </router-link>
     </div>
     <div class="card-col">
-      <div class="card" v-for="card in data[3]" :key="card.name">
+      <router-link
+        class="card"
+        v-for="card in data[3]"
+        :key="card.name"
+        :to="{
+          path: '/details/' + card.name,
+          query: { data: card.name, num: 3 },
+        }"
+      >
         <img :src="card.images.thumbnail" alt="wr" />
         <div class="title">
           <h2>{{ card.name }}</h2>
           <p>{{ card.artist.name }}</p>
         </div>
-      </div>
+      </router-link>
     </div>
   </section>
 </template>
@@ -47,7 +79,10 @@ export default {
       data,
     };
   },
-  mounted() {},
+  mounted() {
+    console.log(data[0][0].description);
+  },
+  methods: {},
 };
 </script>
 
@@ -114,6 +149,12 @@ img {
   z-index: 1;
   transition: 0.3s;
 }
+/* .card a {
+  display: block;
+  height: 100%;
+  z-index: 1000;
+  position: relative;
+} */
 @media (min-width: 688px) {
   .cards {
     flex-direction: row;
