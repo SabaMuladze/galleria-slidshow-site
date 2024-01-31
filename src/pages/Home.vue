@@ -79,9 +79,7 @@ export default {
       data,
     };
   },
-  mounted() {
-    console.log(data[0][0].description);
-  },
+  mounted() {},
   methods: {},
 };
 </script>
