@@ -35,12 +35,12 @@
 
     <div>
       <router-link
-        v-if="!isStarted"
+        v-if="!$store.state.isStarted"
         to="/details/1?num=0&id=1"
         @click="startStop"
         >START SLIDESHOW</router-link
       >
-      <router-link v-if="isStarted" to="/" @click="startStop"
+      <router-link v-if="$store.state.isStarted" to="/" @click="startStop"
         >STOP SLIDESHOW</router-link
       >
     </div>
@@ -51,21 +51,15 @@
 export default {
   data() {
     return {
-      isStarted: false,
-      word: "START",
+      // isStarted: false,
     };
   },
   mounted() {
-    console.log(this.$route.path);
+    console.log(!this.$store.state.isStarted);
   },
   methods: {
     startStop() {
-      this.isStarted = !this.isStarted;
-    },
-    checkPath() {
-      if (this.$route.path == "/home") {
-        this.isStarted = !this.isStarted;
-      }
+      this.$store.dispatch("toggleStart");
     },
   },
 };

@@ -2,6 +2,7 @@
   <section class="cards">
     <div class="card-col">
       <router-link
+        @click="stopSlide"
         class="card"
         v-for="(card, index) in data[0]"
         :key="card.name"
@@ -80,7 +81,11 @@ export default {
     };
   },
   mounted() {},
-  methods: {},
+  methods: {
+    stopSlide() {
+      this.$store.dispatch("toggleStart");
+    },
+  },
 };
 </script>
 

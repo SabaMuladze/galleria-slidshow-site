@@ -59,7 +59,6 @@ export default {
       nextId: parseInt(this.$route.query.id),
       fullData: data[0].concat(data[1]).concat(data[2]).concat(data[3]),
       nextData: 0,
-      totalParts: "",
       show: false,
     };
   },
