@@ -11,6 +11,23 @@ export default {
   components: {
     Header,
   },
+  data() {
+    return {
+      show: true,
+    };
+  },
+  computed: {},
+  methods: {
+    close() {
+      this.show = !this.show;
+    },
+    getPicture(picture) {
+      console.log(picture);
+    },
+  },
+  mounted() {
+    console.log();
+  },
 };
 </script>
 
@@ -22,5 +39,8 @@ export default {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+body {
+  height: 100vh;
 }
 </style>
