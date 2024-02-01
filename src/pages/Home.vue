@@ -3,11 +3,11 @@
     <div class="card-col">
       <router-link
         class="card"
-        v-for="card in data[0]"
+        v-for="(card, index) in data[0]"
         :key="card.name"
         :to="{
-          path: '/details/' + card.name,
-          query: { data: card.name, num: 0 },
+          path: '/details/' + card.id,
+          query: { num: 0, id: card.id },
         }"
       >
         <img :src="card.images.thumbnail" alt="wr" />
@@ -20,11 +20,11 @@
     <div class="card-col">
       <router-link
         class="card"
-        v-for="card in data[1]"
+        v-for="(card, index) in data[1]"
         :key="card.name"
         :to="{
-          path: '/details/' + card.name,
-          query: { data: card.name, num: 1 },
+          path: '/details/' + card.id,
+          query: { num: 1, id: card.id },
         }"
       >
         <img :src="card.images.thumbnail" alt="wr" />
@@ -37,11 +37,11 @@
     <div class="card-col">
       <router-link
         class="card"
-        v-for="card in data[2]"
+        v-for="(card, index) in data[2]"
         :key="card.name"
         :to="{
-          path: '/details/' + card.name,
-          query: { data: card.name, num: 2 },
+          path: '/details/' + card.id,
+          query: { num: 2, id: card.id },
         }"
       >
         <img :src="card.images.thumbnail" alt="wr" />
@@ -54,11 +54,11 @@
     <div class="card-col">
       <router-link
         class="card"
-        v-for="card in data[3]"
+        v-for="(card, index) in data[3]"
         :key="card.name"
         :to="{
-          path: '/details/' + card.name,
-          query: { data: card.name, num: 3 },
+          path: '/details/' + card.id,
+          query: { num: 3, id: card.id },
         }"
       >
         <img :src="card.images.thumbnail" alt="wr" />

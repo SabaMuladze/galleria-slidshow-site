@@ -9,7 +9,21 @@
       </div>
     </div>
     <p class="desc">{{ cardData[0].description }}</p>
+    <div class="store">
+      <a target="_blank" :href="cardData[0]?.source">GO TO SOURCE</a>
+    </div>
   </section>
+  <footer>
+    <div></div>
+    <div class="arrows">
+      <router-link to="/">
+        <img src="../../public/assets/shared/icon-back-button.svg" alt="" />
+      </router-link>
+      <button @click="nextCard">
+        <img src="../../public/assets/shared/icon-next-button.svg" alt="" />
+      </button>
+    </div>
+  </footer>
 </template>
 
 <script>
@@ -18,15 +32,15 @@ export default {
   data() {
     return {
       cardData: data,
+      data,
       window: "",
+      nextNum: parseInt(this.$route.query.num) + 1,
+      pic: 0,
+      id: this.$route.query.id,
+      nextId: parseInt(this.$route.query.id),
+      slide: null,
+      fullData: data[0].concat(data[1]).concat(data[2]).concat(data[3]),
     };
-  },
-  mounted() {
-    this.cardData = data[this.$route.query.num].filter(
-      (card) => card.name === this.$route.query.data
-    );
-    console.log(this.cardData[0]?.images?.gallery);
-    this.window = window.innerWidth;
   },
   computed: {
     heroes() {
@@ -37,12 +51,29 @@ export default {
       }
     },
   },
+  mounted() {
+    this.cardData = this.fullData.filter((card) => card.id == this.nextId);
+    this.window = window.innerWidth;
+    console
+      .log
+      // (this.cardData = this.fullData.filter((card) => card.id == 15))
+      ();
+  },
+  methods: {
+    nextCard() {
+      if (this.nextId < 15) {
+        this.cardData = this.fullData.filter((card) => card.id > this.nextId);
+      }
+      this.$router.push({ query: { num: this.nextId, id: this.nextId++ } });
+    },
+  },
 };
 </script>
 
 <style scoped>
 .cont {
-  padding: 24px;
+  min-height: 100vh;
+  padding: 0 24px 24px 24px;
 }
 .pic {
   width: 100%;
@@ -78,5 +109,27 @@ p {
 }
 .desc {
   margin-top: 120px;
+}
+.store {
+  margin-top: 50px !important;
+}
+a {
+  color: #7d7d7d;
+  font-size: 12px;
+}
+footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 24px 24px 24px;
+}
+
+.arrows {
+  display: flex;
+  gap: 20px;
+}
+button {
+  border: none;
+  outline: none;
+  background-color: white;
 }
 </style>

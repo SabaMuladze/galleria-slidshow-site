@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Home from "./pages/Home.vue";
 import Details from "./components/Details.vue";
+import data from "../data.json";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -10,10 +11,9 @@ const router = createRouter({
     {
       path: "/details/:id",
       component: Details,
-      props: true,
+      // props: true,
       name: "Details",
     },
   ],
 });
-
 export default router;
