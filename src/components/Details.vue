@@ -1,22 +1,28 @@
 <template>
   <div v-if="show" class="show-img">
-    <button @sendData="getPicture" @click="close">close</button>
-    <img :src="'.' + this.cardData[0]?.images?.hero.small" alt="" />
+    <div class="show-parent">
+      <button class="close-pic" @click="close">CLOSE</button>
+      <img class="modal-pic" :src="'.' + heroes" alt="" />
+    </div>
   </div>
   <section class="cont">
-    <div class="parent">
-      <button @click="open" class="view-pic">View Picture</button>
-      <img class="pic" :src="'.' + heroes" alt="" />
-      <div class="white-box">
-        <h2>{{ cardData[0].name }}</h2>
-        <p>{{ cardData[0].artist?.name }}</p>
-        <img class="portrait" :src="'.' + cardData[0].artist?.image" alt="" />
+    <main>
+      <div class="parent">
+        <button @click="open" class="view-pic">View Picture</button>
+        <img class="pic" :src="'.' + heroes" alt="" />
+        <div class="white-box">
+          <h2>{{ cardData[0].name }}</h2>
+          <p class="artist-name">{{ cardData[0].artist?.name }}</p>
+          <img class="portrait" :src="'.' + cardData[0].artist?.image" alt="" />
+        </div>
       </div>
-    </div>
-    <p class="desc">{{ cardData[0].description }}</p>
-    <div class="store">
-      <a target="_blank" :href="cardData[0]?.source">GO TO SOURCE</a>
-    </div>
+      <div class="description-div">
+        <p class="desc">{{ cardData[0].description }}</p>
+        <div class="store">
+          <a target="_blank" :href="cardData[0]?.source">GO TO SOURCE</a>
+        </div>
+      </div>
+    </main>
   </section>
 
   <span
@@ -29,7 +35,7 @@
       <p class="next-p">{{ cardData[0]?.artist?.name }}</p>
     </div>
     <div class="arrows">
-      <button>
+      <button @click="previousCard">
         <img src="../../public/assets/shared/icon-back-button.svg" alt="" />
       </button>
       <button @click="nextCard">
@@ -49,18 +55,17 @@ export default {
       data,
       window: "",
       pic: 0,
-      nextNum: parseInt(this.$route.query.num) + 1,
       id: this.$route.query.id,
       nextId: parseInt(this.$route.query.id),
       fullData: data[0].concat(data[1]).concat(data[2]).concat(data[3]),
       nextData: 0,
       totalParts: "",
-      show: true,
+      show: false,
     };
   },
   computed: {
     heroes() {
-      if (window.innerWidth > "688px") {
+      if (window.innerWidth > 720) {
         return this.cardData[0]?.images?.hero.large;
       } else {
         return this.cardData[0]?.images?.hero.small;
@@ -71,13 +76,20 @@ export default {
     this.cardData = this.fullData.filter((card) => card.id == this.nextId);
     this.window = window.innerWidth;
     this.nextData = this.fullData.filter((card) => card.id > this.nextId);
-    console.log(this.nextData[0]?.name);
+    console.log(this.fullData.filter((card) => card.id > this.nextId));
+    this.heroes;
   },
   methods: {
     nextCard() {
       if (this.nextId < 15) {
         this.cardData = this.fullData.filter((card) => card.id > this.nextId);
-        this.$router.push({ query: { num: this.nextId, id: this.nextId++ } });
+        this.$router.push({ query: { id: this.nextId++ } });
+      }
+    },
+    previousCard() {
+      if (this.nextId >= 1) {
+        this.cardData = this.fullData.filter((card) => card.id == this.nextId);
+        this.$router.push({ query: { id: this.nextId-- } });
       }
     },
     close() {
@@ -94,12 +106,18 @@ export default {
 .cont {
   min-height: 100vh;
   padding: 0 24px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 50px;
 }
 .pic {
   width: 100%;
 }
 .parent {
-  max-height: 450px;
+  max-height: 550px;
   max-width: 475px;
   position: relative;
 }
@@ -110,6 +128,7 @@ h2 {
 }
 p {
   opacity: 0.7528;
+  line-height: 30px;
   color: #7d7d7d;
 }
 
@@ -128,10 +147,11 @@ p {
   bottom: -64px;
 }
 .desc {
-  margin-top: 120px;
+  margin-top: 125px;
+  max-width: 460px;
 }
 .store {
-  margin-top: 50px !important;
+  margin-top: 50px;
 }
 a {
   color: #7d7d7d;
@@ -140,7 +160,7 @@ a {
 footer {
   display: flex;
   justify-content: space-between;
-  padding: 0 24px 24px 24px;
+  padding: 24px 24px 24px 24px;
 }
 
 .arrows {
@@ -174,10 +194,9 @@ button {
 }
 .show-img {
   display: flex;
-  flex-direction: column;
   position: fixed;
   background-color: rgba(0, 0, 0, 0.63);
-  min-height: 110% !important;
+  min-height: 100% !important;
   width: 100% !important;
   z-index: 1000;
   align-items: center;
@@ -187,5 +206,99 @@ button {
 }
 .show-img img {
   max-width: 90%;
+  margin: auto;
+}
+.close-pic {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: white;
+  font-size: 18px;
+  position: relative;
+  bottom: 30px;
+}
+.show-parent {
+  display: flex;
+  width: fit-content;
+  flex-direction: column;
+  align-items: end;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.description-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+@media (min-width: 720px) {
+  .white-box {
+    min-width: 450px;
+    min-height: 240px;
+    bottom: 725px;
+    left: 222.5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: start;
+  }
+  .portrait {
+    height: 128px;
+    width: 128px;
+    bottom: -128px;
+    left: 270px;
+  }
+  h2 {
+    font-size: 56px;
+  }
+  main {
+    width: 100%;
+    gap: 100px;
+  }
+  main:first-child {
+    left: 0;
+  }
+  .desc {
+    margin: 100px auto 0 auto;
+  }
+
+  .pic,
+  .parent {
+    max-height: 720px;
+    max-width: 618px;
+  }
+  .artist-name {
+    position: relative;
+    top: 10px;
+    left: -105px;
+  }
+  .modal-pic {
+    height: 700px;
+    margin-top: 50px;
+  }
+}
+@media (min-width: 1280px) {
+  main {
+    flex-direction: row;
+  }
+  .desc {
+    margin-left: 0;
+  }
+}
+.white-box {
+  left: 322.5px;
+}
+@media (min-width: 1440px) {
+  .description-div {
+    width: 40%;
+  }
+  .cont {
+    padding: 0 24px 24px 40px;
+  }
+  .white-box {
+    left: 400.5px;
+  }
 }
 </style>

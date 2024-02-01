@@ -7,7 +7,7 @@
         :key="card.name"
         :to="{
           path: '/details/' + card.id,
-          query: { num: 0, id: card.id },
+          query: { id: card.id },
         }"
       >
         <img :src="card.images.thumbnail" alt="wr" />
@@ -24,7 +24,7 @@
         :key="card.name"
         :to="{
           path: '/details/' + card.id,
-          query: { num: 1, id: card.id },
+          query: { id: card.id },
         }"
       >
         <img :src="card.images.thumbnail" alt="wr" />
@@ -41,7 +41,7 @@
         :key="card.name"
         :to="{
           path: '/details/' + card.id,
-          query: { num: 2, id: card.id },
+          query: { id: card.id },
         }"
       >
         <img :src="card.images.thumbnail" alt="wr" />
@@ -58,7 +58,7 @@
         :key="card.name"
         :to="{
           path: '/details/' + card.id,
-          query: { num: 3, id: card.id },
+          query: { id: card.id },
         }"
       >
         <img :src="card.images.thumbnail" alt="wr" />
@@ -121,6 +121,7 @@ h2 {
   position: absolute;
   color: white;
   bottom: 20px;
+  max-width: 350px;
 }
 p {
   position: absolute;
