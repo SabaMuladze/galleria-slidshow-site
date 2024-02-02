@@ -1,78 +1,80 @@
 <template>
-  <section class="cards">
-    <div class="card-col">
-      <router-link
-        @click="stopSlide"
-        class="card"
-        v-for="(card, index) in data[0]"
-        :key="card.name"
-        :to="{
-          path: '/details/' + card.id,
-          query: { id: card.id },
-        }"
-      >
-        <img :src="card.images.thumbnail" alt="wr" />
-        <div class="title">
-          <h2>{{ card.name }}</h2>
-          <p>{{ card.artist.name }}</p>
-        </div>
-      </router-link>
-    </div>
-    <div class="card-col">
-      <router-link
-        @click="stopSlide"
-        class="card"
-        v-for="(card, index) in data[1]"
-        :key="card.name"
-        :to="{
-          path: '/details/' + card.id,
-          query: { id: card.id },
-        }"
-      >
-        <img :src="card.images.thumbnail" alt="wr" />
-        <div class="title">
-          <h2>{{ card.name }}</h2>
-          <p>{{ card.artist.name }}</p>
-        </div>
-      </router-link>
-    </div>
-    <div class="card-col">
-      <router-link
-        @click="stopSlide"
-        class="card"
-        v-for="(card, index) in data[2]"
-        :key="card.name"
-        :to="{
-          path: '/details/' + card.id,
-          query: { id: card.id },
-        }"
-      >
-        <img :src="card.images.thumbnail" alt="wr" />
-        <div class="title">
-          <h2>{{ card.name }}</h2>
-          <p>{{ card.artist.name }}</p>
-        </div>
-      </router-link>
-    </div>
-    <div class="card-col">
-      <router-link
-        @click="stopSlide"
-        class="card"
-        v-for="(card, index) in data[3]"
-        :key="card.name"
-        :to="{
-          path: '/details/' + card.id,
-          query: { id: card.id },
-        }"
-      >
-        <img :src="card.images.thumbnail" alt="wr" />
-        <div class="title">
-          <h2>{{ card.name }}</h2>
-          <p>{{ card.artist.name }}</p>
-        </div>
-      </router-link>
-    </div>
-  </section>
+  <transition name="load" mode="out-in">
+    <section v-if="animate" class="cards">
+      <div class="card-col">
+        <router-link
+          @click="stopSlide"
+          class="card"
+          v-for="(card, index) in data[0]"
+          :key="card.name"
+          :to="{
+            path: '/details/' + card.id,
+            query: { id: card.id },
+          }"
+        >
+          <img :src="card.images.thumbnail" alt="wr" />
+          <div class="title">
+            <h2>{{ card.name }}</h2>
+            <p>{{ card.artist.name }}</p>
+          </div>
+        </router-link>
+      </div>
+      <div class="card-col">
+        <router-link
+          @click="stopSlide"
+          class="card"
+          v-for="(card, index) in data[1]"
+          :key="card.name"
+          :to="{
+            path: '/details/' + card.id,
+            query: { id: card.id },
+          }"
+        >
+          <img :src="card.images.thumbnail" alt="wr" />
+          <div class="title">
+            <h2>{{ card.name }}</h2>
+            <p>{{ card.artist.name }}</p>
+          </div>
+        </router-link>
+      </div>
+      <div class="card-col">
+        <router-link
+          @click="stopSlide"
+          class="card"
+          v-for="(card, index) in data[2]"
+          :key="card.name"
+          :to="{
+            path: '/details/' + card.id,
+            query: { id: card.id },
+          }"
+        >
+          <img :src="card.images.thumbnail" alt="wr" />
+          <div class="title">
+            <h2>{{ card.name }}</h2>
+            <p>{{ card.artist.name }}</p>
+          </div>
+        </router-link>
+      </div>
+      <div class="card-col">
+        <router-link
+          @click="stopSlide"
+          class="card"
+          v-for="(card, index) in data[3]"
+          :key="card.name"
+          :to="{
+            path: '/details/' + card.id,
+            query: { id: card.id },
+          }"
+        >
+          <img :src="card.images.thumbnail" alt="wr" />
+          <div class="title">
+            <h2>{{ card.name }}</h2>
+            <p>{{ card.artist.name }}</p>
+          </div>
+        </router-link>
+      </div>
+    </section>
+  </transition>
 </template>
 
 <script>
@@ -81,9 +83,12 @@ export default {
   data() {
     return {
       data,
+      animate: false,
     };
   },
-  mounted() {},
+  mounted() {
+    this.animate = true;
+  },
   methods: {
     stopSlide() {
       this.$store.dispatch("toggleStart");
@@ -93,7 +98,19 @@ export default {
 </script>
 
 <style scoped>
+.load-enter-active,
+.load-leave-active {
+  transition: all 0.8s;
+}
+.load-enter-from {
+  opacity: 0.2;
+}
+.load-enter-to {
+  opacity: 1;
+}
+
 .cards {
+  transition: all 1s ease;
   width: 100%;
   display: flex;
   flex-direction: column;

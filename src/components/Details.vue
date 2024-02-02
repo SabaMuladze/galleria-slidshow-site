@@ -1,10 +1,11 @@
 <template>
+  <transition name="load" mode="out-in">
+    <div v-if="animate">
   <div v-if="show" class="show-img">
     <div class="show-parent">
       <button class="close-pic" @click="close">CLOSE</button>
-      <img v-if="small" class="modal-pic" :src="'.' + smallPic" alt="" />
-      <img v-else-if="large" class="modal-pic" :src="'.' + largePic" alt="" />
-
+      <!-- <img v-if="small" class="modal-pic" :src="'.' + smallPic" alt="" /> -->
+      <img class="modal-pic" :src="'.' + largePic" alt="" />
     </div>
   </div>
   <section class="cont">
@@ -12,7 +13,7 @@
       <div class="parent">
         <button @click="open" class="view-pic">VIEW PICTURE</button>
         <img v-if="small" class="pic" :src="'.' + smallPic" alt="" />
-      <img v-else-if="large" class="pic" :src="'.' + largePic" alt="" />
+        <img v-if="large" class="pic" :src="'.' + largePic" alt="" />
         <div class="white-box">
           <h2>{{ cardData[0].name }}</h2>
           <p class="artist-name">{{ cardData[0].artist?.name }}</p>
@@ -20,7 +21,9 @@
         </div>
       </div>
       <div class="description-div">
-        <p class="desc">{{ cardData[0].description }}
+        <p  :class="'desc'">
+          <span class="year">{{ cardData[0].year }}</span>
+          {{ cardData[0].description }}
           <div class="store">
           <a target="_blank" :href="cardData[0]?.source">GO TO SOURCE</a>
         </div>
@@ -30,7 +33,7 @@
     </main>
   </section>
   <span
-    :style="{ width: nextId - 1 + window, maxWidth: '100%' }"
+    :style="{ width: lineW, maxWidth: '100%' }"
     class="line"
   ></span>
   <footer>
@@ -47,61 +50,61 @@
       </button>
     </div>
   </footer>
+</div>
+</transition>
 </template>
 
 <script>
 import data from "../../data.json";
 export default {
-  emits: ["sendData"],
   data() {
     return {
       cardData: data,
       data,
       window: "",
-      pic: 0,
+      // pic: 0,
       id: this.$route.query.id,
       nextId: parseInt(this.$route.query.id),
       fullData: data[0].concat(data[1]).concat(data[2]).concat(data[3]),
-      nextData: 0,
-      show: false,
+      // nextData: 0,
       screenWidth: window.innerWidth,
       small: true,
       large:true,
+      show: false,
+      lineW: '7.6%',
+      animate: false
     };
   },
   computed: {
-    // heroes() {
-    //   if () {
-    //     return this.cardData[0]?.images?.hero.large;
-    //   } else {
-    //     return this.cardData[0]?.images?.hero.small;
-    //   }
-    // },
     smallPic(){
       return this.cardData[0]?.images?.hero.small;
     },
     largePic(){
       return this.cardData[0]?.images?.hero.large;
-    }
+    },
   },
   mounted() {
     this.cardData = this.fullData.filter((card) => card.id == this.nextId);
     this.window = window.innerWidth;
-    this.nextData = this.fullData.filter((card) => card.id > this.nextId);
-    console.log(this.fullData.filter((card) => card.id > this.nextId));
+    // this.nextData = this.fullData.filter((card) => card.id > this.nextId);
     window.addEventListener("resize", this.handleResize)
+    this.handleResize()
+    this.animate =true
+    this.lineW = this.cardData[0]?.lineW
   },
   methods: {
     nextCard() {
       if (this.nextId < 15) {
         this.cardData = this.fullData.filter((card) => card.id > this.nextId);
         this.$router.push({ query: { id: this.nextId++ } });
+        this.lineW= this.cardData[0]?.lineW
       }
     },
     previousCard() {
       if (this.nextId >= 1) {
         this.cardData = this.fullData.filter((card) => card.id == this.nextId);
         this.$router.push({ query: { id: this.nextId-- } });
+        this.lineW= this.cardData[0]?.lineW
       }
     },
     close() {
@@ -120,19 +123,31 @@ export default {
         this.small=true
       }
       this.screenWidth = window.innerWidth;
-  }
+  },
 }
 }
 </script>
 
 <style scoped>
+.load-enter-active,
+.load-leave-active {
+  transition: all 0.8s;
+}
+.load-enter-from {
+  opacity: 0.2;
+}
+.load-enter-to {
+  opacity: 1;
+}
 .cont {
+  transition: all 1s ease-in;
   min-height: 80vh;
   padding: 0 24px 24px 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  overflow: hidden;
 
   gap: 50px;
 }
@@ -178,7 +193,16 @@ p {
   display: flex;
   flex-direction: column;
   margin: 100px auto 0 auto;
+  position: relative;
 }
+.year{
+  position: absolute;
+  font-size: 120px;
+  color: #7d7d7d1f;
+  right: 0;
+  top: -50px;
+}
+
 .store {
   margin-top: 50px;
 }
@@ -210,8 +234,15 @@ button {
 }
 .line {
   background-color: black;
-  height: 2px;
+  height: 1.5px;
   display: block;
+}
+.line::after{
+  content: '';
+  width: 100%;
+  height: 1.5px;
+  background-color:#7d7d7d4d;
+  position: absolute;
 }
 .view-pic {
   width: fit-content;
@@ -266,6 +297,17 @@ main {
   justify-content: center;
 }
 @media (min-width: 720px) {
+  .year{
+    left: -150px;
+    font-size: 200px;
+  top: 10px;
+  }
+.next-h2{
+  font-size: 18px;
+}
+.next-p{
+  font-size: 14px;
+}
   .view-pic{
     top: 536px;
   }

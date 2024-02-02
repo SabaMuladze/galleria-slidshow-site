@@ -50,12 +50,7 @@
 <script>
 export default {
   data() {
-    return {
-      // isStarted: false,
-    };
-  },
-  mounted() {
-    console.log(!this.$store.state.isStarted);
+    return {};
   },
   methods: {
     startStop() {

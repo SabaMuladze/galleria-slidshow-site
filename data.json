@@ -1,6 +1,7 @@
 [
   [
     {
+      "lineW": "7.6%",
       "id": 1,
       "name": "Starry Night",
       "year": 1889,
@@ -20,6 +21,7 @@
       }
     },
     {
+      "lineW": "14.2%",
       "id": 2,
       "name": "The Storm on the Sea of Galilee",
       "year": 1633,
@@ -39,6 +41,7 @@
       }
     },
     {
+      "lineW": "20.8%",
       "id": 3,
       "name": "Lady with an Ermine",
       "year": 1489,
@@ -58,6 +61,7 @@
       }
     },
     {
+      "lineW": "27.4%",
       "id": 4,
       "name": "The Boy in the Red Vest",
       "year": 1889,
@@ -79,6 +83,7 @@
   ],
   [
     {
+      "lineW": "34%",
       "id": 5,
       "name": "Girl with a Pearl Earring",
       "year": 1665,
@@ -98,6 +103,7 @@
       }
     },
     {
+      "lineW": "40.6%",
       "id": 6,
       "name": "The Great Wave off Kanagawa",
       "year": 1831,
@@ -117,6 +123,7 @@
       }
     },
     {
+      "lineW": "47.2%",
       "id": 7,
       "name": "The Night Café",
       "year": 1888,
@@ -136,6 +143,7 @@
       }
     },
     {
+      "lineW": "53.8%",
       "id": 8,
       "name": "Arnolfini Portrait",
       "year": 1434,
@@ -157,6 +165,7 @@
   ],
   [
     {
+      "lineW": "60.4%",
       "id": 9,
       "name": "Guernica",
       "year": 1937,
@@ -176,6 +185,7 @@
       }
     },
     {
+      "lineW": "67%",
       "id": 10,
       "name": "Van Gogh Self-portrait",
       "year": 1889,
@@ -195,6 +205,7 @@
       }
     },
     {
+      "lineW": "73.6%",
       "id": 11,
       "name": "Mona Lisa",
       "year": 1503,
@@ -216,6 +227,7 @@
   ],
   [
     {
+      "lineW": "80.2%",
       "id": 12,
       "name": "Penitent Magdalene",
       "year": 1625,
@@ -235,6 +247,7 @@
       }
     },
     {
+      "lineW": "86.8%",
       "id": 13,
       "name": "The Sleeping Gypsy",
       "year": 1897,
@@ -254,6 +267,7 @@
       }
     },
     {
+      "lineW": "93.4%",
       "id": 14,
       "name": "The Basket of Apples",
       "year": 1893,
@@ -273,6 +287,7 @@
       }
     },
     {
+      "lineW": "100%",
       "id": 15,
       "name": "The Swing",
       "year": 1767,

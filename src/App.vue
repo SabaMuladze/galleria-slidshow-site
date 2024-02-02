@@ -12,21 +12,15 @@ export default {
     Header,
   },
   data() {
-    return {
-      show: true,
-    };
+    return {};
   },
-  computed: {},
-  methods: {
-    close() {
-      this.show = !this.show;
-    },
-    getPicture(picture) {
-      console.log(picture);
-    },
-  },
+  methods: {},
   mounted() {
-    console.log();
+    // this.checkPath();
+    if (performance.navigation.type === 1) {
+      // Modify the path to '/'
+      window.location.pathname = "/";
+    }
   },
 };
 </script>
