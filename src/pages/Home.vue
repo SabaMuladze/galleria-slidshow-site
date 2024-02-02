@@ -20,6 +20,7 @@
     </div>
     <div class="card-col">
       <router-link
+        @click="stopSlide"
         class="card"
         v-for="(card, index) in data[1]"
         :key="card.name"
@@ -37,6 +38,7 @@
     </div>
     <div class="card-col">
       <router-link
+        @click="stopSlide"
         class="card"
         v-for="(card, index) in data[2]"
         :key="card.name"
@@ -54,6 +56,7 @@
     </div>
     <div class="card-col">
       <router-link
+        @click="stopSlide"
         class="card"
         v-for="(card, index) in data[3]"
         :key="card.name"
@@ -114,6 +117,8 @@ export default {
 
 .card {
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 .title {
   display: flex;
@@ -121,12 +126,13 @@ export default {
   position: relative;
   bottom: 33px;
   left: 32px;
+  width: 100%;
 }
 h2 {
   position: absolute;
   color: white;
   bottom: 20px;
-  max-width: 350px;
+  width: calc(100% - 35px);
 }
 p {
   position: absolute;
@@ -172,9 +178,17 @@ img {
     height: 100%;
     width: 100%;
   }
+  .card-col:nth-child(2),
+  .card-col:nth-child(4) {
+    margin-top: 40px;
+  }
 }
 
 @media (min-width: 1024px) {
+  .card-col:nth-child(2),
+  .card-col:nth-child(4) {
+    margin-top: 0px;
+  }
   .card-col {
     width: 23%;
   }
